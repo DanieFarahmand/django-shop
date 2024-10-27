@@ -1,74 +1,55 @@
 {% extends "base.html" %}
 
+{% block title %}Product List{% endblock %}
 
-{% block title %} product list {% endblock %}
+{% block head %}
+    {{ block.super }}
+{% endblock %}
+
 {% block content %}
-    <body>
+    {% include "catalogue/components/navbar.html" %}
+
     <h1>Hello, {{ request.user.username }}</h1>
 
     {% for pr in products %}
-
-        <div
-                class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"
-        >
-            <div
-                    class="relative rounded-xl bg-muted p-2 shadow-base md:p-5"
-            >
+        <div class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base">
+            <div class="relative rounded-xl bg-muted p-2 shadow-base md:p-5">
                 <!-- image -->
                 <div class="mb-2 md:mb-5" draggable="false">
-                    <a href="./product-detail.html">
-                        <img
-                                alt=""
-                                class="mx-auto w-32 rounded-lg md:w-auto"
-                                src="./assets/images/products/p8.png"
-                        />
+                    <a href="{% url 'product-detail' pr.pk %}">
+                        <img alt="" class="mx-auto w-32 rounded-lg md:w-auto" src="./assets/images/products/p8.png"/>
                     </a>
                 </div>
                 <!-- title -->
                 <div class="mb-1">
-                    <a
-                            class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"
-                            href="./product-detail.html"
-                    >
-                        49787 <a href="{% url 'product-detail' pr.pk %}">
+                    <a href="{% url 'product-detail' pr.pk %}" class="line-clamp-2 h-10 text-sm md:h-12 md:text-base">
                         {{ pr.title }}
-                    </a><
                     </a>
                 </div>
                 <!-- Prices -->
                 <div class="flex flex-col">
                     <!-- Old price -->
                     <div class="h-5 text-left">
-                        <del
-                                class="text-xs text-text/60 decoration-warning xs:text-sm md:text-base"
-                        >
-
-
-                        </del>
+                        {% if pr.old_price %}
+                            <del class="text-xs text-text/60 decoration-warning xs:text-sm md:text-base">
+                                {{ pr.old_price }} تومان
+                            </del>
+                        {% endif %}
                     </div>
+                    <!-- Discount and New Price -->
                     <div class="flex items-center justify-between">
                         <div>
-                            <p
-                                    class="w-7 rounded-full bg-warning py-px text-center text-xs text-white xs:w-9 xs:text-sm"
-                            >
+                            <p class="w-7 rounded-full bg-warning py-px text-center text-xs text-white xs:w-9 xs:text-sm">
                                 60%
                             </p>
                         </div>
-                        <!-- New price -->
-                        <div
-                                class="text-xs font-bold text-primary xs:text-sm md:text-base"
-                        >
+                        <div class="text-xs font-bold text-primary xs:text-sm md:text-base">
                             {{ pr.product_default_price }}
-                            <span class="text-xs font-light md:text-sm"
-                            >تومان</span
-                            >
+                            <span class="text-xs font-light md:text-sm">تومان</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
-
-    </body>
 {% endblock %}
-

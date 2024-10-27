@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>وبلاگ</title>
+        {% load static %}
+        <link href="{% static 'css/fonts.css' %}" rel="stylesheet"/>
+        <link href="{% static 'css/dependencies/swiper.min.css' %}" rel="stylesheet"/>
+        <link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+        <link href="{% static 'css/custom.css' %}" rel="stylesheet"/>
+        <link href="{% static 'css/app.css' %}" rel="stylesheet"/>
 
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>وبلاگ</title>
-
-    <link href="./assets/css/fonts.css" rel="stylesheet"/>
-    <link href="./assets/css/dependencies/swiper.min.css" rel="stylesheet"/>
-    <link href="./assets/css/theme.css" rel="stylesheet"/>
-    <link href="./assets/css/custom.css" rel="stylesheet"/>
-    <link href="./assets/css/app.css" rel="stylesheet"/>
-
-    <script src="./assets/scripts/mount.js"></script>
-    <script defer src="./assets/scripts/dependencies/flowbite.min.js"></script>
-    <script defer src="./assets/scripts/dependencies/swiper.min.js"></script>
-    <script defer src="./assets/scripts/app.js"></script>
-    <script defer src="./assets/scripts/custom.js"></script>
-
+        <script src="{% static 'scripts/mount.js' %}"></script>
+        <script defer src="{% static 'scripts/dependencies/flowbite.min.js' %}"></script>
+        <script defer src="{% static 'scripts/dependencies/swiper.min.js' %}"></script>
+        <script defer src="{% static 'scripts/app.js' %}"></script>
+        <script defer src="{% static 'scripts/custom.js' %}"></script>
+    {% endblock head %}
 </head>
 <body>
 {% block content %}
@@ -234,7 +234,7 @@
                         <img
                                 alt="namad"
                                 class="h-[130px] w-[130px] blur-sm"
-                                src="./assets/images/namad.png"
+                                src="{% static 'images/namad.png' %}"
                         />
                         <!-- Delete This -->
                         <span
@@ -247,7 +247,7 @@
                         <img
                                 alt="samandehi"
                                 class="h-[130px] w-[130px] blur-sm"
-                                src="./assets/images/samandehi.png"
+                                src="{% static 'images/samandehi.png' %}"
                         />
                         <span
                                 class="absolute inset-x-0 top-0 mx-auto w-fit rounded-lg bg-warning px-4 py-2 text-white dark:bg-red-600"
