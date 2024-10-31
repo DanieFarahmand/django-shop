@@ -1,9 +1,14 @@
 from django.contrib import admin
-from catalogue.models import ProductType, Product, Category, Brand, ProductAttribute, ProductAttributeValue
+from catalogue.models import ProductType, Product, ProductImage, Category, Brand, ProductAttribute, \
+    ProductAttributeValue
 
 
 class ProductTypeAttributeInline(admin.TabularInline):
     model = ProductAttribute
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
 
 
 class ProductTypeAttributeValueInline(admin.TabularInline):
@@ -39,7 +44,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ["is_active"]
     search_fields = ["title", "upc", "category__name", "brand__name"]
     actions = ["activate_all", "deactivate_all"]
-    inlines = [ProductTypeAttributeValueInline]
+    inlines = [ProductTypeAttributeValueInline, ProductImageInline]
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)

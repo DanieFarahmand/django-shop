@@ -86,6 +86,11 @@ class Product(models.Model):
         return self.partners.all().order_by("price").first()
 
 
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to="products/")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
+
+
 class ProductAttributeValue(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="attribute_values")
     attribute = models.ForeignKey(ProductAttribute, on_delete=models.CASCADE, related_name="value")

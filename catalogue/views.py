@@ -1,9 +1,7 @@
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from catalogue.models import Product, Category
 from catalogue.utils import check_is_staff
 
 
@@ -12,6 +10,10 @@ def product_list_view(request):
     products = Product.objects.all()
     context["products"] = products
     return render(request, "catalogue/product_list.html", context=context)
+
+
+def home_view(request):
+    return render(request, "homepage.html")
 
 
 def category_products_view(request, pk):

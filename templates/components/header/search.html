@@ -1,0 +1,248 @@
+{% load static %}
+
+<div
+        class="relative max-w-xl flex-1"
+        id="desktopHeaderSearchBase"
+>
+    <div
+            id="desktopHeaderSearchWrapper"
+            class="flex items-center justify-between rounded-lg border-b-transparent bg-background px-2 dark:border-white/10 dark:border-b-transparent"
+    >
+        <div>
+            <svg class="h-6 w-6">
+                <use xlink:href="#search"/>
+            </svg>
+        </div>
+        <label class="sr-only">desktop header search</label>
+        <input
+                id="desktopHeaderSearch"
+                class="flex grow rounded-lg border-none bg-background px-2 py-3 text-text/90 outline-none placeholder:text-sm placeholder:text-text/60 focus:ring-0 placeholder:"
+                placeholder="جستجو کنید ..."
+                type="text"
+        />
+    </div>
+    <div
+            id="desktopHeaderSearchResult"
+            class="absolute inset-x-0 top-full hidden w-full overflow-hidden rounded-b-lg border border-t-transparent bg-muted dark:border-white/10 dark:border-t-transparent"
+    >
+        <div class="max-h-[450px] overflow-y-auto py-5">
+            <!-- Result -->
+            <div class="mb-8 px-5">
+                <div class="swiper search-result-desktop">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a
+                                    href="#"
+                                    class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
+                            >
+                                <img
+                                        src="./assets/images/products/p6.png"
+                                        alt="Product Image"
+                                        class="w-16"
+                                />
+                                <p class="line-clamp-2">
+                                    کفش نایک کفش نایک کفش نایک
+                                </p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a
+                                    href="#"
+                                    class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
+                            >
+                                <img
+                                        src="./assets/images/products/p4.png"
+                                        alt="Product Image"
+                                        class="w-16"
+                                />
+                                <p class="line-clamp-2">
+                                    کفش نایک کفش نایک کفش نایک
+                                </p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a
+                                    href="#"
+                                    class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
+                            >
+                                <img
+                                        src="./assets/images/products/p5.png"
+                                        alt="Product Image"
+                                        class="w-16"
+                                />
+                                <p class="line-clamp-2">
+                                    کفش نایک کفش نایک کفش نایک
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <!-- Recent searches -->
+                <div class="px-5">
+                    <div
+                            class="mb-4 flex items-center gap-x-2 text-text/90"
+                    >
+                        <svg class="h-6 w-6">
+                            <use xlink:href="#recent"/>
+                        </svg>
+                        <p>جستجو های اخیر شما</p>
+                    </div>
+                    <div class="swiper search-result-desktop h-14">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Top searches -->
+
+                <div class="px-5">
+                    <div
+                            class="mb-4 flex items-center gap-x-2 text-text/90"
+                    >
+                        <svg class="h-6 w-6">
+                            <use xlink:href="#special-sale"/>
+                        </svg>
+                        <p>جستجو های پرطرفدار</p>
+                    </div>
+                    <div class="swiper search-result-desktop h-14">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a
+                                        href="#"
+                                        class="flex items-center justify-center gap-x-2 rounded-full border p-2 text-text/60 hover:border-border/50"
+                                >
+                                    <p class="line-clamp-1">کفش نایک</p>
+                                    <svg class="h-4 w-4">
+                                        <use xlink:href="#chevron-left"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
