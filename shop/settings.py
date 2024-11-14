@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # created apps
+
     "catalogue.apps.CatalogueConfig",
     "transaction.apps.TransactionConfig",
     "partner.apps.PartnerConfig",

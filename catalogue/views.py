@@ -3,6 +3,10 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 from catalogue.utils import check_is_staff
+from catalogue.models import Category
+from django.http import HttpResponse
+from .models import Product
+from django.shortcuts import get_object_or_404
 
 
 def product_list_view(request):
@@ -12,8 +16,28 @@ def product_list_view(request):
     return render(request, "catalogue/product_list.html", context=context)
 
 
-def home_view(request):
-    return render(request, "homepage.html")
+def homepage_view(request):
+    all_products = Product.objects.all()
+    newest_products = all_products.order_by("-created_time")
+    context = {
+
+        'products': all_products,
+        'newest_products': newest_products,
+        "most_soled": ...,
+        "blog_posts": ...
+    }
+
+    return render(request, "homepage.html", context=context)
+
+
+def product_detail_view(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    context = {
+        'product': product
+    }
+
+    return render(request, "catalogue/product-detail.html", context)
 
 
 def category_products_view(request, pk):
@@ -29,17 +53,6 @@ def category_products_view(request, pk):
     products = Product.objects.select_related("category").all()
     context = "\n".join([f"{p.title} - {p.category}" for p in products])
     return HttpResponse(context)
-
-
-from django.http import HttpResponse
-from .models import Product
-from django.shortcuts import get_object_or_404
-
-
-def product_detail_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    response_content = f"Title: {product.title}, Description: {product.description}"
-    return HttpResponse(response_content)
 
 
 def product_search_view(request):

@@ -35,7 +35,7 @@ class ProductAttribute(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=32)
-    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True, related_name='children')
 
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
@@ -50,6 +50,10 @@ class Category(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("category-detail", args=[self.pk])
+
+    @classmethod
+    def get_parent_categories(cls):
+        return cls.objects.filter(parrent__isnull=True)
 
 
 class Brand(models.Model):

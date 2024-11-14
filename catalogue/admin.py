@@ -39,7 +39,7 @@ class ProductTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "upc", "category", "is_active"]
+    list_display = ["title", "upc", "category", "id", "is_active"]
     list_filter = ["is_active"]
     list_editable = ["is_active"]
     search_fields = ["title", "upc", "category__name", "brand__name"]

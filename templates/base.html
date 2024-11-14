@@ -30,9 +30,12 @@
 
 
 {% include "components/svg-symbols.html" %}
+{% include "components/header/main-header.html" %}
+
 {% block content %}
 
 {% endblock %}
+{% include "components/footer.html" %}
 
 <script>
     const addSearchFunctionality = (searchInput, itemList) => {
@@ -82,6 +85,20 @@
         "colorListFilterMobileSearchInput",
     );
     const colorListMobile = document.getElementById("colorListFilterMobile");
+
+    function showChildren(categoryId) {
+        // Hide all child category containers
+        document.querySelectorAll('.child-category-list').forEach(function (element) {
+            element.classList.add('hidden');
+        });
+
+        // Show the relevant child category container
+        const targetElement = document.getElementById('children-of-' + categoryId);
+        if (targetElement) {
+            targetElement.classList.remove('hidden');
+        }
+    }
+
 
     addSearchFunctionality(brandListSearchInputDesktop, brandListDesktop);
     addSearchFunctionality(brandListSearchInputMobile, brandListMobile);
