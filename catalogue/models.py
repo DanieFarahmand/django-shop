@@ -17,10 +17,13 @@ class ProductAttribute(models.Model):
     INTEGER = 1
     STRING = 2
     FLOAT = 3
+    LIST = 4
+
     CHOICE_FIELD = (
         (INTEGER, "integer"),
         (STRING, "string"),
-        (FLOAT, "float")
+        (FLOAT, "float"),
+        (LIST, "list")
     )
     title = models.CharField(max_length=32)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name="attributes")

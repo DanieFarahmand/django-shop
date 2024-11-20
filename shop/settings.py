@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "catalogue.apps.CatalogueConfig",
     "transaction.apps.TransactionConfig",
     "partner.apps.PartnerConfig",
+    "comments.apps.CommentsConfig",
 ]
 
 MIDDLEWARE = [

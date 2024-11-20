@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
@@ -33,8 +34,20 @@ def homepage_view(request):
 def product_detail_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
+    # Fetch color and size variants
+    color_variants = product.attribute_values.filter(attribute__title="color variants")
+    size_variants = product.attribute_values.filter(attribute__title="size variants")
+
+    colors = [color for variant in color_variants for color in json.loads(variant.value)] if color_variants else []
+    sizes = [size for variant in size_variants for size in json.loads(variant.value)] if size_variants else []
+
+    excluded_attributes = ['color variants', 'size variants']
+
     context = {
-        'product': product
+        'product': product,
+        'excluded_attributes': excluded_attributes,
+        'colors': colors,
+        'sizes': sizes,
     }
 
     return render(request, "catalogue/product-detail.html", context)
