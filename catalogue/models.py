@@ -1,11 +1,6 @@
 from django.db import models
 
 
-class MyModelManager(models.Model):
-    def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(is_active=True)
-
-
 class ProductType(models.Model):
     title = models.CharField(max_length=32, blank=True, null=True)
 
@@ -78,12 +73,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name="products")
     is_active = models.BooleanField(default=True)
+    stock = models.PositiveIntegerField(default=0)
 
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
     objects = models.Manager()
-    custom_objects = MyModelManager()
 
     def __str__(self):
         return self.title
@@ -105,3 +100,28 @@ class ProductAttributeValue(models.Model):
 
     def __str__(self):
         return f"{self.product} ({self.attribute}: {self.value})"
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=20)
+    hex_code = models.CharField(max_length=7)
+
+    def __str__(self):
+        return f"{self.name}: {self.hex_code}"
+
+
+class ProductColor(models.Model):
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="colors")
+
+
+class Size(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"size is: {self.size}"
+
+
+class ProductSize(models.Model):
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="sizes")
