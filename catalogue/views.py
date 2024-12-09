@@ -1,8 +1,10 @@
 import json
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.db.models import Prefetch, Q
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from cart.form import AddToBasketForm
 from catalogue.utils import check_is_staff
 from catalogue.models import Category
 from django.http import HttpResponse
@@ -31,23 +33,29 @@ def homepage_view(request):
     return render(request, "homepage.html", context=context)
 
 
+from django.shortcuts import get_object_or_404, render
+from django.db.models import Prefetch
+
+
 def product_detail_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
+    product = get_object_or_404(
+        Product.objects.prefetch_related(
+            Prefetch('colors__color'),
+            Prefetch('sizes__size'),
+            'images',
+            'attribute_values__attribute'
+        ),
+        pk=pk
+    )
 
-    # Fetch color and size variants
-    color_variants = product.attribute_values.filter(attribute__title="color variants")
-    size_variants = product.attribute_values.filter(attribute__title="size variants")
-
-    colors = [color for variant in color_variants for color in json.loads(variant.value)] if color_variants else []
-    sizes = [size for variant in size_variants for size in json.loads(variant.value)] if size_variants else []
-
-    excluded_attributes = ['color variants', 'size variants']
+    form = AddToBasketForm(initial={"product": product.id})
 
     context = {
         'product': product,
-        'excluded_attributes': excluded_attributes,
-        'colors': colors,
-        'sizes': sizes,
+        'colors': product.colors.all(),
+        'sizes': product.sizes.all(),
+        'images': product.images.all(),
+        'form': form,
     }
 
     return render(request, "catalogue/product-detail.html", context)

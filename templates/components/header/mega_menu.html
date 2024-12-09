@@ -9,11 +9,8 @@
         <div
                 class="flex h-[450px] max-h-[450px] w-full overflow-hidden rounded-b-lg pt-0.5"
         >
-            <!-- Right side -->
-            <div
-                    class="main-scroll w-50 overflow-y-auto bg-background"
-                    dir="ltr"
-            >
+            <!-- Right side: Root Categories -->
+            <div class="main-scroll w-50 overflow-y-auto bg-background" dir="ltr">
                 <ul dir="rtl" id="mega-menu-parents">
                     {% for category in categories %}
                         <li data-category-id="{{ category.id }}" class="parent-item"
@@ -23,18 +20,16 @@
                             </a>
                         </li>
                     {% endfor %}
-
-
                 </ul>
             </div>
-            <!-- Left side -->
 
+            <!-- Left side: Child Categories -->
             <div class="main-scroll h-[450px] max-h-[450px] w-full overflow-auto" dir="ltr">
                 <div class="flex flex-grow p-5" dir="rtl" id="mega-menu-childs">
                     {% for category in categories %}
                         <div class="child-category-list hidden"
                              id="children-of-{{ category.id }}">
-                            <!-- Head section -->
+                            <!-- "View All" Link -->
                             <div class="mb-4">
                                 <a class="flex items-center gap-x-1 py-2 text-sm text-primary"
                                    href="#">
@@ -44,7 +39,8 @@
                                     </svg>
                                 </a>
                             </div>
-                            <!-- Display direct children -->
+
+                            <!-- Recursive Children Rendering -->
                             <div class="flex flex-grow flex-wrap gap-x-14 gap-y-8">
                                 {% for child in category.children.all %}
                                     <div class="space-y-2">
@@ -56,21 +52,24 @@
                                                 <use xlink:href="#chevron-left"></use>
                                             </svg>
                                         </a>
-                                        <!-- Nested children of the child category -->
-                                        <ul class="pl-4">
-                                            {% for grandchild in child.children.all %}
-                                                <li>
-                                                    <a class="block py-2 text-sm text-text/90 hover:text-primary"
-                                                       href="#">
-                                                        {{ grandchild.name }}
-                                                    </a>
-                                                </li>
-                                            {% empty %}
-                                                <li>
-                                                    <span class="block py-2 text-sm text-text/50">هیچ زیرشاخه‌ای موجود نیست</span>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
+
+                                        <!-- Render nested children -->
+                                        {% if child.children.exists %}
+                                            <ul class="pl-4">
+                                                {% for grandchild in child.children.all %}
+                                                    <li>
+                                                        <a class="block py-2 text-sm text-text/90 hover:text-primary"
+                                                           href="#">
+                                                            {{ grandchild.name }}
+                                                        </a>
+                                                    </li>
+                                                {% empty %}
+                                                    <li>
+                                                        <span class="block py-2 text-sm text-text/50">هیچ زیرشاخه‌ای موجود نیست</span>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                             </div>
@@ -78,8 +77,6 @@
                     {% endfor %}
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

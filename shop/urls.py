@@ -10,5 +10,6 @@ urlpatterns = [
                   path("catalogue/", include("catalogue.urls")),
                   path("transaction/", include("transaction.urls")),
                   path("partner/", include("partner.urls")),
+                  path("cart/", include("cart.urls")),
                   path('', homepage_view, name='homepage')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

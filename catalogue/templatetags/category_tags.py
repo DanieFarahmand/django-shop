@@ -7,4 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def get_category():
-    return Category.objects.all()
+    categories = Category.objects.filter(parent__isnull=True).prefetch_related(
+        'children__children'
+    )
+    return categories

@@ -14,11 +14,6 @@ class ProductImageInline(admin.TabularInline):
 class ProductColorInline(admin.TabularInline):
     model = ProductColor
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "color":
-            kwargs["queryset"] = Color.objects.all()[:100]  # Limit the number of colors
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.select_related("color", "product")  # Optimize queries
@@ -101,3 +96,30 @@ class ColorAdmin(admin.ModelAdmin):
 @admin.register(Size)
 class SizeAdmin(admin.ModelAdmin):
     list_display = ["name"]
+
+
+from django.contrib import admin
+from catalogue.models import ProductColor, ProductSize
+
+
+# Register the ProductColor model
+@admin.register(ProductColor)
+class ProductColorAdmin(admin.ModelAdmin):
+    list_display = ['color_name', 'product']  # Display the color name and product
+    search_fields = ['color__name', 'product__name']  # Enable search on color name and product name
+
+    def color_name(self, obj):
+        return obj.color.name  # Access the color's name via the relationship
+
+    color_name.admin_order_field = 'color__name'
+
+
+@admin.register(ProductSize)
+class ProductSizeAdmin(admin.ModelAdmin):
+    list_display = ['size_name', 'product']  # Display the size name and product
+    search_fields = ['size__name', 'product__name']  # Enable search on size name and product name
+
+    def size_name(self, obj):
+        return obj.size.name  # Access the size's name via the relationship
+
+    size_name.admin_order_field = 'size__name'
